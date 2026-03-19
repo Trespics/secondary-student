@@ -9,6 +9,8 @@ const Subjects = () => {
   const [subjects, setSubjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [activeTab, setActiveTab] = useState("All");
+
   useEffect(() => {
     const fetchSubjects = async () => {
       try { 
@@ -20,6 +22,11 @@ const Subjects = () => {
     };
     fetchSubjects();
   }, []);
+
+  const classes = ["All", ...new Set(subjects.map((s: any) => s.classes?.name).filter(Boolean))];
+  const filteredSubjects = activeTab === "All" 
+    ? subjects 
+    : subjects.filter((s: any) => s.classes?.name === activeTab);
 
   if (loading) {
     return (
@@ -58,6 +65,21 @@ const Subjects = () => {
             </div>
           </div>
 
+          {/* Subject Tabs */}
+          {subjects.length > 0 && classes.length > 2 && (
+            <div className="subjects-tabs">
+              {classes.map((className: any) => (
+                <button
+                  key={className}
+                  className={`subject-tab ${activeTab === className ? 'active' : ''}`}
+                  onClick={() => setActiveTab(className)}
+                >
+                  {className}
+                </button>
+              ))}
+            </div>
+          )}
+
           {/* Subjects Grid */}
           {subjects.length === 0 ? (
             <div className="empty-state">
@@ -77,13 +99,13 @@ const Subjects = () => {
               {/* Subject Count Info */}
               <div className="subjects-info">
                 <p className="info-text">
-                  Showing <span className="info-highlight">{subjects.length}</span> subject{subjects.length !== 1 ? 's' : ''} for the current semester
+                  Showing <span className="info-highlight">{filteredSubjects.length}</span> subject{filteredSubjects.length !== 1 ? 's' : ''} {activeTab !== "All" ? `for ${activeTab}` : 'for the current semester'}
                 </p>
               </div>
 
               {/* Subjects Grid */}
               <div className="subjects-grid">
-                {subjects.map((subject: any, index) => (
+                {filteredSubjects.map((subject: any, index: number) => (
                   <SubjectCard key={subject.id || index} subject={subject} index={index} />
                 ))}
               </div>

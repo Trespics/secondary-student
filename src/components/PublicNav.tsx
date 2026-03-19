@@ -41,14 +41,14 @@ const PublicNav = () => {
               transition: "color 0.3s"
             }}>{link.label}</Link>
           ))}
-          <Link to="/login?redirect=/student" style={{
+          <Link to="/student" style={{
             textDecoration: "none", padding: "0.6rem 1.2rem",
             background: "rgba(59, 130, 246, 0.1)",
             border: "1px solid rgba(59, 130, 246, 0.3)",
             color: "#60a5fa", borderRadius: "10px", fontSize: "0.9rem",
             fontWeight: 600, transition: "background 0.2s"
           }}>Student Portal</Link>
-          <Link to="/login?redirect=/masomo" style={{
+          <Link to="/masomo" style={{
             textDecoration: "none", padding: "0.6rem 1.2rem",
             background: "linear-gradient(135deg, #8b5cf6, #6366f1)",
             color: "white", borderRadius: "10px", fontSize: "0.9rem",
@@ -82,13 +82,13 @@ const PublicNav = () => {
               fontWeight: 500, fontSize: "0.95rem"
             }}>{link.label}</Link>
           ))}
-          <Link to="/login?redirect=/student" onClick={() => setMobileOpen(false)} style={{
+          <Link to="/student" onClick={() => setMobileOpen(false)} style={{
             textDecoration: "none", padding: "0.75rem 1.5rem", textAlign: "center",
             border: "1px solid rgba(59, 130, 246, 0.3)",
             color: "#60a5fa", borderRadius: "12px", fontWeight: 600, fontSize: "0.9rem",
             marginTop: "0.5rem"
           }}>Student Portal</Link>
-          <Link to="/login?redirect=/masomo" onClick={() => setMobileOpen(false)} style={{
+          <Link to="/masomo" onClick={() => setMobileOpen(false)} style={{
             textDecoration: "none", padding: "0.75rem 1.5rem", textAlign: "center",
             background: "linear-gradient(135deg, #8b5cf6, #6366f1)",
             color: "white", borderRadius: "12px", fontWeight: 600, fontSize: "0.9rem",

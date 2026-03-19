@@ -9,7 +9,8 @@ interface Props { isOpen?: boolean; onClose?: () => void; }
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, to: "/masomo" },
   { label: "Subjects", icon: BookOpen, to: "/masomo/subjects" },
-  { label: "Materials", icon: FileText, to: "/masomo/materials" },
+  { label: "Books", icon: BookOpen, to: "/masomo/books" },
+  { label: "Pastpapers", icon: FileText, to: "/masomo/past-papers" },
   { label: "Assignments", icon: ClipboardCheck, to: "/masomo/assignments" },
   { label: "Grades & Results", icon: BarChart3, to: "/masomo/grades" },
   { label: "CATs", icon: ClipboardCheck, to: "/masomo/cats" },

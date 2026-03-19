@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider, useAuth } from "@/lib/auth-context";
 import { Toaster } from "sonner";
@@ -24,9 +24,13 @@ import MasomoDashboard from "@/pages/masomo/MasomoDashboard";
 import Subjects from "@/pages/masomo/Subjects";
 import CourseDetails from "@/pages/masomo/CourseDetails";
 import Materials from "@/pages/masomo/Materials";
+import Books from "@/pages/masomo/Books";
+import PastPapers from "@/pages/masomo/PastPapers";
 import Assignments from "@/pages/masomo/Assignments";
+import TakeAssignment from "@/pages/masomo/TakeAssignment";
 import GradesResults from "@/pages/masomo/GradesResults";
 import CATs from "@/pages/masomo/CATs";
+import TakeCAT from "@/pages/masomo/TakeCAT";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, refetchOnWindowFocus: false } },
@@ -34,8 +38,20 @@ const queryClient = new QueryClient({
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
-  if (isLoading) return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc" }}><div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" /></div>;
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  const location = useLocation();
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc" }}>
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname + location.search)}`} replace />;
+  }
+
   return <>{children}</>;
 }
 
@@ -51,7 +67,7 @@ function AuthRedirect({ children }: { children: React.ReactNode }) {
   }
   return <>{children}</>;
 }
-
+   
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -62,7 +78,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
-
+   
             {/* Auth */}
             <Route path="/login" element={<AuthRedirect><Login /></AuthRedirect>} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -78,9 +94,13 @@ function App() {
             <Route path="/masomo/subjects" element={<ProtectedRoute><Subjects /></ProtectedRoute>} />
             <Route path="/masomo/subjects/:courseId" element={<ProtectedRoute><CourseDetails /></ProtectedRoute>} />
             <Route path="/masomo/materials" element={<ProtectedRoute><Materials /></ProtectedRoute>} />
+            <Route path="/masomo/books" element={<ProtectedRoute><Books /></ProtectedRoute>} />
+            <Route path="/masomo/past-papers" element={<ProtectedRoute><PastPapers /></ProtectedRoute>} />
             <Route path="/masomo/assignments" element={<ProtectedRoute><Assignments /></ProtectedRoute>} />
+            <Route path="/masomo/assignments/:id/take" element={<ProtectedRoute><TakeAssignment /></ProtectedRoute>} />
             <Route path="/masomo/grades" element={<ProtectedRoute><GradesResults /></ProtectedRoute>} />
             <Route path="/masomo/cats" element={<ProtectedRoute><CATs /></ProtectedRoute>} />
+            <Route path="/masomo/cats/:id/take" element={<ProtectedRoute><TakeCAT /></ProtectedRoute>} />
 
             {/* 404 */}
             <Route path="*" element={<NotFound />} />

@@ -1,20 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import MasomoPortalLayout from "@/components/MasomoPortalLayout";
 import api from "@/lib/api";
 import { 
   ClipboardCheck, Loader2, Clock, CheckCircle, 
   Upload, AlertCircle, FileText, Calendar, 
-  User, BookOpen, Download, Eye, Filter,
-  ChevronDown, Search
+  User, BookOpen, Download, Eye,
+  Search, X
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import "../styles/Assignment.css";
 
 const Assignments = () => {
+  const navigate = useNavigate();
   const [assignments, setAssignments] = useState<any[]>([]);
   const [filteredAssignments, setFilteredAssignments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Submission Modal State
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [selectedAssignment, setSelectedAssignment] = useState<any>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -35,7 +46,7 @@ const Assignments = () => {
     // Filter by status
     if (filter !== "all") {
       const now = new Date();
-      filtered = filtered.filter(a => {
+      filtered = filtered.filter(a => {     
         if (!a.due_date) return filter === "all";
         
         const dueDate = new Date(a.due_date);
@@ -60,6 +71,53 @@ const Assignments = () => {
   }, [filter, assignments, searchQuery]);
 
   const isOverdue = (date: string) => new Date(date) < new Date();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.type !== "application/pdf") {
+        toast.error("Please upload a PDF file.");
+        return;
+      }
+      setSelectedFile(file);
+    }
+  };
+
+  const handleSubmission = async () => {
+    if (!selectedFile || !selectedAssignment) return;
+
+    setSubmitting(true);
+    try {
+      // 1. Upload to storage
+      const fd = new FormData();
+      fd.append("file", selectedFile);
+      
+      const uploadRes = await api.post("/upload", fd, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+
+      const fileUrl = uploadRes.data.url;
+
+      // 2. Submit assignment
+      await api.post("/student/submissions", {
+        assignment_id: selectedAssignment.id,
+        file_url: fileUrl
+      });
+
+      toast.success("Assignment submitted successfully!");
+      setIsSubmitModalOpen(false);
+      setSelectedFile(null);
+      
+      // Refresh list
+      const { data } = await api.get("/student/assignments");
+      setAssignments(data || []);
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.response?.data?.error || "Failed to submit assignment");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const getStatusBadge = (assignment: any) => {
     if (assignment.submitted) {
@@ -300,12 +358,22 @@ const Assignments = () => {
                           )}
                           
                           {!assignment.submitted && !overdue && (
-                            <button className="action-button submit-button">
+                            <button 
+                              onClick={() => {
+                                if (assignment.is_mcq) {
+                                  navigate(`/masomo/assignments/${assignment.id}/take`);
+                                } else {
+                                  setSelectedAssignment(assignment);
+                                  setIsSubmitModalOpen(true);
+                                }
+                              }}  
+                              className="action-button submit-button"
+                            >
                               <Upload size={16} />
-                              <span>Submit</span>
+                              <span>{assignment.is_mcq ? "Take Quiz" : "Submit"}</span>
                             </button>
                           )}
-                          
+                             
                           {assignment.submitted && (
                             <div className="submitted-badge">
                               <CheckCircle size={16} />
@@ -322,6 +390,116 @@ const Assignments = () => {
           )}
         </div>
       </div>
+
+      {/* Submission Modal */}
+      <AnimatePresence>
+        {isSubmitModalOpen && (
+          <div className="modal-overlay">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="submission-modal"
+            >
+              <div className="modal-header">
+                <div className="header-left">
+                  <div className="modal-icon-wrapper">
+                    <Upload size={20} />
+                  </div>
+                  <div>
+                    <h2 className="modal-title">Submit Assignment</h2>
+                    <p className="modal-subtitle">{selectedAssignment?.title}</p>
+                  </div>
+                </div>
+                <button 
+                  className="modal-close" 
+                  onClick={() => setIsSubmitModalOpen(false)}
+                  disabled={submitting}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="modal-body">
+                <div 
+                  className={`upload-zone ${selectedFile ? 'has-file' : ''}`}
+                  onClick={() => !submitting && fileInputRef.current?.click()}
+                >
+                  <input 
+                    type="file" 
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    accept=".pdf"
+                    className="hidden-input"
+                    disabled={submitting}
+                  />
+                  
+                  {selectedFile ? (
+                    <div className="file-info">
+                      <FileText size={48} className="file-icon" />
+                      <div className="file-details">
+                        <span className="file-name">{selectedFile.name}</span>
+                        <span className="file-size">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                      </div>
+                      {!submitting && (
+                        <button 
+                          className="remove-file"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedFile(null);
+                          }}
+                        >
+                          <X size={16} />
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="upload-prompt">
+                      <div className="upload-icon-circle">
+                        <Upload size={32} />
+                      </div>
+                      <p className="prompt-text">Click to browse or drag and drop</p>
+                      <p className="prompt-hint">Only PDF files are supported (max 10MB)</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="submission-notice">
+                  <AlertCircle size={14} />
+                  <span>By submitting, you confirm this is your own work.</span>
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button 
+                  className="cancel-button"
+                  onClick={() => setIsSubmitModalOpen(false)}
+                  disabled={submitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  className="confirm-submit-button"
+                  disabled={!selectedFile || submitting}
+                  onClick={handleSubmission}
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 size={18} className="spin" />
+                      <span>Submitting...</span>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle size={18} />
+                      <span>Confirm Submission</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </MasomoPortalLayout>
   );
 };

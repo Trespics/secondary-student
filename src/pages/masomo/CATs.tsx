@@ -3,8 +3,11 @@ import { motion } from "framer-motion";
 import MasomoPortalLayout from "@/components/MasomoPortalLayout";
 import api from "@/lib/api";
 import { Calendar, Clock, Loader2, ClipboardCheck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const CATs = () => {
+  const navigate = useNavigate();
   const [cats, setCats] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,6 +63,14 @@ const CATs = () => {
                         {cat.time_limit_minutes && <span>⏱ {cat.time_limit_minutes} min</span>}
                       </div>
                     </div>
+                    {!status.label.includes("Completed") && (
+                      <Button 
+                        onClick={() => navigate(`/masomo/cats/${cat.id}/take`)}
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl h-12 px-6"
+                      >
+                        Take CAT
+                      </Button>
+                    )}
                   </div>
                 </motion.div>
               );

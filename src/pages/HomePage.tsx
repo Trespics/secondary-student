@@ -63,7 +63,7 @@ const HomePage = () => {
             </p>
 
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-              <Link to="/login" style={{
+              <Link to="/student" style={{
                 textDecoration: "none", padding: "0.9rem 2rem",
                 background: "linear-gradient(135deg, #3b82f6, #6366f1)",
                 color: "white", borderRadius: "14px", fontSize: "1rem",
@@ -113,67 +113,73 @@ const HomePage = () => {
             <motion.div
               initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}
+              whileHover={{ y: -5 }}
             >
-              <div style={{
-                background: "linear-gradient(135deg, rgba(59,130,246,0.1), rgba(59,130,246,0.02))",
-                border: "1px solid rgba(59,130,246,0.15)", borderRadius: "24px",
-                padding: "2.5rem", height: "100%", transition: "transform 0.3s, box-shadow 0.3s"
-              }}>
+              <Link to="/student" style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <div style={{
-                  width: "56px", height: "56px", borderRadius: "16px",
-                  background: "linear-gradient(135deg, #3b82f6, #2563eb)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  marginBottom: "1.5rem", boxShadow: "0 8px 20px rgba(59,130,246,0.3)"
+                  background: "linear-gradient(135deg, rgba(59,130,246,0.1), rgba(59,130,246,0.02))",
+                  border: "1px solid rgba(59,130,246,0.15)", borderRadius: "24px",
+                  padding: "2.5rem", height: "100%", transition: "all 0.3s"
                 }}>
-                  <User size={28} color="white" />
+                  <div style={{
+                    width: "56px", height: "56px", borderRadius: "16px",
+                    background: "linear-gradient(135deg, #3b82f6, #2563eb)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: "1.5rem", boxShadow: "0 8px 20px rgba(59,130,246,0.3)"
+                  }}>
+                    <User size={28} color="white" />
+                  </div>
+                  <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", marginBottom: "0.75rem" }}>
+                    Student Portal
+                  </h3>
+                  <p style={{ color: "#94a3b8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+                    Manage your profile, view notifications, and keep track of your personal details and enrollment status.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {["Dashboard & Overview", "Profile Management", "Notifications"].map(item => (
+                      <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#60a5fa", fontSize: "0.9rem" }}>
+                        <Shield size={14} /> {item}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", marginBottom: "0.75rem" }}>
-                  Student Portal
-                </h3>
-                <p style={{ color: "#94a3b8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
-                  Manage your profile, view notifications, and keep track of your personal details and enrollment status.
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                  {["Dashboard & Overview", "Profile Management", "Notifications"].map(item => (
-                    <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#60a5fa", fontSize: "0.9rem" }}>
-                      <Shield size={14} /> {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              </Link>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ y: -5 }}
             >
-              <div style={{
-                background: "linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.02))",
-                border: "1px solid rgba(139,92,246,0.15)", borderRadius: "24px",
-                padding: "2.5rem", height: "100%", transition: "transform 0.3s, box-shadow 0.3s"
-              }}>
+              <Link to="/masomo" style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <div style={{
-                  width: "56px", height: "56px", borderRadius: "16px",
-                  background: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  marginBottom: "1.5rem", boxShadow: "0 8px 20px rgba(139,92,246,0.3)"
+                  background: "linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.02))",
+                  border: "1px solid rgba(139,92,246,0.15)", borderRadius: "24px",
+                  padding: "2.5rem", height: "100%", transition: "all 0.3s"
                 }}>
-                  <BookOpen size={28} color="white" />
+                  <div style={{
+                    width: "56px", height: "56px", borderRadius: "16px",
+                    background: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: "1.5rem", boxShadow: "0 8px 20px rgba(139,92,246,0.3)"
+                  }}>
+                    <BookOpen size={28} color="white" />
+                  </div>
+                  <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", marginBottom: "0.75rem" }}>
+                    Masomo Portal
+                  </h3>
+                  <p style={{ color: "#94a3b8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+                    Access learning materials, complete assignments, take CATs, and track your academic grades and performance.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {["Subjects & Materials", "Assignments & CATs", "Grades & Results"].map(item => (
+                      <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#a78bfa", fontSize: "0.9rem" }}>
+                        <GraduationCap size={14} /> {item}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", marginBottom: "0.75rem" }}>
-                  Masomo Portal
-                </h3>
-                <p style={{ color: "#94a3b8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
-                  Access learning materials, complete assignments, take CATs, and track your academic grades and performance.
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                  {["Subjects & Materials", "Assignments & CATs", "Grades & Results"].map(item => (
-                    <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#a78bfa", fontSize: "0.9rem" }}>
-                      <GraduationCap size={14} /> {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -253,7 +259,7 @@ const HomePage = () => {
           <p style={{ color: "#94a3b8", marginBottom: "2rem", fontSize: "1.05rem" }}>
             Login to your student portal and access all your learning resources.
           </p>
-          <Link to="/login" style={{
+          <Link to="/student" style={{
             textDecoration: "none", padding: "0.9rem 2.5rem",
             background: "linear-gradient(135deg, #3b82f6, #6366f1)",
             color: "white", borderRadius: "14px", fontSize: "1rem",
