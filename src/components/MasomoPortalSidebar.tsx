@@ -13,7 +13,7 @@ const navItems = [
   { label: "Pastpapers", icon: FileText, to: "/masomo/past-papers" },
   { label: "Assignments", icon: ClipboardCheck, to: "/masomo/assignments" },
   { label: "Grades & Results", icon: BarChart3, to: "/masomo/grades" },
-  { label: "CATs", icon: ClipboardCheck, to: "/masomo/cats" },
+  // { label: "CATs", icon: ClipboardCheck, to: "/masomo/cats" },
 ];
 
 const MasomoPortalSidebar = ({ onClose }: Props) => {

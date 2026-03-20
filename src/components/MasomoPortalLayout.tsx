@@ -21,7 +21,7 @@ const MasomoPortalLayout = ({ children }: Props) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (!isAuthenticated) return <Navigate to="/masomo/login" replace />;
 
   return (
     <div className="portal-layout masomo">

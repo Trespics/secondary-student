@@ -167,6 +167,10 @@ const Assignments = () => {
                 <span className="stat-label">Total</span>
               </div>
               <div className="stat-item">
+                <span className="stat-value">{assignments.filter(a => a.submitted).length}</span>
+                <span className="stat-label">Submitted</span>
+              </div>
+              <div className="stat-item">
                 <span className="stat-value">{assignments.filter(a => a.due_date && !isOverdue(a.due_date) && !a.submitted).length}</span>
                 <span className="stat-label">Pending</span>
               </div>
