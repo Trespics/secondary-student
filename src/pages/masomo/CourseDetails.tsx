@@ -4,11 +4,10 @@ import MasomoPortalLayout from "@/components/MasomoPortalLayout";
 import api from "@/lib/api";
 import { 
   Loader2, ArrowLeft, FileText, Video, ClipboardCheck, 
-  File, Download, Eye, Clock, AlertCircle, User, BookOpen,
-  Calendar, ChevronRight, Star, Award, TrendingUp
+  File, Download, Eye, Clock, AlertCircle, User, BookOpen
 } from "lucide-react";
 import "../styles/CourseDetails.css";
-
+    
 const CourseDetails = () => {
   const { courseId } = useParams();
   const [activeTab, setActiveTab] = useState<"notes" | "books" | "videos" | "pastpapers" | "assignments">("notes");

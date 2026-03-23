@@ -6,7 +6,7 @@ import "./styles/PortalLayout.css";
 
 interface Props { isOpen?: boolean; onClose?: () => void; }
 
-const navItems = [
+const navItems = [    
   { label: "Dashboard", icon: LayoutDashboard, to: "/masomo" },
   { label: "Subjects", icon: BookOpen, to: "/masomo/subjects" },
   { label: "Books", icon: BookOpen, to: "/masomo/books" },
@@ -14,7 +14,7 @@ const navItems = [
   { label: "Assignments", icon: ClipboardCheck, to: "/masomo/assignments" },
   { label: "Grades & Results", icon: BarChart3, to: "/masomo/grades" },
   // { label: "CATs", icon: ClipboardCheck, to: "/masomo/cats" },
-];
+];    
 
 const MasomoPortalSidebar = ({ onClose }: Props) => {
   const { pathname } = useLocation();
@@ -22,7 +22,7 @@ const MasomoPortalSidebar = ({ onClose }: Props) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  useEffect(() => {
+  useEffect(() => {   
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       if (window.innerWidth > 768) setIsMobileMenuOpen(false);

@@ -2,7 +2,7 @@ import { type ReactNode, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth-context";
 import MasomoPortalSidebar from "./MasomoPortalSidebar";
-import { Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";   
 import "./styles/PortalLayout.css";
 
 interface Props { children: ReactNode; }

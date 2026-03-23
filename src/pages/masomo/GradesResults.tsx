@@ -72,11 +72,12 @@ const GradesResults = () => {
     
     const marks = data.map(item => item.marks_obtained || 0).filter(m => m > 0);
     const total = marks.reduce((a, b) => a + b, 0);
-    const average = marks.length > 0 ? (total / marks.length).toFixed(1) : 0;
+    const averageValue = marks.length > 0 ? total / marks.length : 0;
+    const average = averageValue.toFixed(1);
     const highest = marks.length > 0 ? Math.max(...marks) : 0;
     const lowest = marks.length > 0 ? Math.min(...marks) : 0;
     
-    return { average, highest, lowest, count: marks.length };
+    return { average, averageValue, highest, lowest, count: marks.length };
   };
 
   if (loading) {
@@ -231,17 +232,18 @@ const GradesResults = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredData.map((item: any, index) => {
+                    {filteredData.map((item: any) => {
                       const marksObtained = item.marks_obtained || 0;
                       const totalMarks = item.total_marks || 100;
-                      const percentage = totalMarks > 0 ? ((marksObtained / totalMarks) * 100).toFixed(1) : 0;
+                      const percentageValue = totalMarks > 0 ? (marksObtained / totalMarks) * 100 : 0;
+                      const percentageDisplay = percentageValue.toFixed(1);
                       
                       let grade = "F";
                       let gradeClass = "grade-f";
-                      if (percentage >= 80) { grade = "A"; gradeClass = "grade-a"; }
-                      else if (percentage >= 70) { grade = "B"; gradeClass = "grade-b"; }
-                      else if (percentage >= 60) { grade = "C"; gradeClass = "grade-c"; }
-                      else if (percentage >= 50) { grade = "D"; gradeClass = "grade-d"; }
+                      if (percentageValue >= 80) { grade = "A"; gradeClass = "grade-a"; }
+                      else if (percentageValue >= 70) { grade = "B"; gradeClass = "grade-b"; }
+                      else if (percentageValue >= 60) { grade = "C"; gradeClass = "grade-c"; }
+                      else if (percentageValue >= 50) { grade = "D"; gradeClass = "grade-d"; }
                       
                       const isExpanded = expandedRow === item.id;
                       
@@ -284,10 +286,10 @@ const GradesResults = () => {
                                 <div className="percentage-bar">
                                   <div 
                                     className="percentage-fill" 
-                                    style={{ width: `${percentage}%` }}
+                                    style={{ width: `${percentageValue}%` }}
                                   />
                                 </div>
-                                <span className="percentage-text">{percentage}%</span>
+                                <span className="percentage-text">{percentageDisplay}%</span>
                               </div>
                             </td>
                             <td>

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import MasomoPortalLayout from "@/components/MasomoPortalLayout";
 import api from "@/lib/api";
 import { 
-  FileText, Loader2, Download, Eye, Search, Video, 
+  FileText, Loader2, Download, Eye, Video, 
   Headphones, BookOpen, File, AlertTriangle,
   FileSpreadsheet, Presentation, Music, Film, Library
 } from "lucide-react";

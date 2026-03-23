@@ -4,12 +4,12 @@ import api from "@/lib/api";
 import { 
   File, Loader2, Download, Eye, Search, AlertTriangle, FileText
 } from "lucide-react";
-import "../styles/Materials.css";
+import "../styles/Pastpapers.css";
 
 const PastPapers = () => {
   const [papers, setPapers] = useState<any[]>([]);
   const [filteredPapers, setFilteredPapers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);  
   const [searchQuery, setSearchQuery] = useState("");
   const [reportDialogOpen, setReportDialogOpen] = useState(false);
   const [reportMaterialId, setReportMaterialId] = useState<string | null>(null);
@@ -99,12 +99,12 @@ const PastPapers = () => {
               <Search className="search-icon" size={18} />
             </div>
           </div>
-
+{/* 
           <div className="materials-info">
             <p className="info-text">
               Showing <span className="info-highlight">{filteredPapers.length}</span> past papers
             </p>
-          </div>
+          </div> */}
 
           {filteredPapers.length === 0 ? (
             <div className="empty-state">

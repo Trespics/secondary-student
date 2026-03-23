@@ -9,7 +9,6 @@ import {
   ClipboardCheck, 
   BarChart3, 
   ArrowRight, 
-  Loader2, 
   Clock,
   GraduationCap,
   Calendar,
@@ -72,7 +71,7 @@ const MasomoDashboard = () => {
       description: "Current semester"
     },
     { 
-      title: "Study Materials", 
+      title: "Study Materials",     
       value: materials.length, 
       icon: FileText, 
       colorClass: "stat-blue",
@@ -101,12 +100,12 @@ const MasomoDashboard = () => {
       case 'document': return <FileSpreadsheet className="icon-small" />;
       default: return <BookMarked className="icon-small" />;
     }
-  };
+  };   
 
   return (
     <MasomoPortalLayout>
       <div className="dashboard-container">
-        <div className="dashboard-content">
+        <div className="dashboard-content">   
           {/* Header Section */}
           <div className="dashboard-header">
             <div className="header-left">
@@ -202,7 +201,7 @@ const MasomoDashboard = () => {
                   </div>
                 ) : (
                   <div className="assignments-list">
-                    {assignments.map((assignment: any, index: number) => (
+                    {assignments.map((assignment: any) => (
                       <div key={assignment.id} className="assignment-item">
                         <div className="assignment-content">
                           <div className="assignment-title-wrapper">
@@ -257,7 +256,7 @@ const MasomoDashboard = () => {
                   </div>
                 ) : (
                   <div className="materials-list">
-                    {materials.map((material: any, index: number) => (
+                    {materials.map((material: any) => (
                       <div key={material.id} className="material-item">
                         <div className="material-content">
                           <div className="material-title-wrapper">
