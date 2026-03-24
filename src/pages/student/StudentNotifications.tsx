@@ -2,50 +2,112 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import StudentPortalLayout from "@/components/StudentPortalLayout";
 import api from "@/lib/api";
-import { Bell, Loader2, CheckCircle } from "lucide-react";
+import { Bell, Loader2, CheckCircle, User } from "lucide-react";
+import "../styles/Notifications.css";
 
 const StudentNotifications = () => {
   const [notifications, setNotifications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetch = async () => {
-      try { const { data } = await api.get("/student/notifications"); setNotifications(data || []); }
-      catch (err) { console.error(err); }
-      finally { setLoading(false); }
+    const fetchNotifications = async () => {
+      try {
+        const { data } = await api.get("/student/notifications");
+        setNotifications(data || []);
+      } catch (err) {
+        console.error("Failed to fetch notifications:", err);
+      } finally {
+        setLoading(false);
+      }
     };
-    fetch();
+    fetchNotifications();
   }, []);
 
-  if (loading) return <StudentPortalLayout><div className="flex items-center justify-center min-h-[60vh]"><Loader2 className="animate-spin h-8 w-8 text-primary" /></div></StudentPortalLayout>;
+  if (loading) {
+    return (
+      <StudentPortalLayout>
+        <div className="notifications-loading">
+          <Loader2 className="loading-spinner" />
+        </div>
+      </StudentPortalLayout>
+    );
+  }
 
   return (
     <StudentPortalLayout>
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight mb-2 flex items-center gap-3"><Bell size={28} className="text-orange-500" /> Notifications</h1>
-          <p className="text-muted-foreground">Stay updated with the latest announcements and alerts.</p>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="notifications-container"
+      >
+        <div className="notifications-header">
+          <h1 className="notifications-title">
+            <Bell className="title-icon" />
+            Notifications
+          </h1>
+          <p className="notifications-subtitle">
+            Stay updated with the latest announcements and alerts.
+          </p>
         </div>
 
         {notifications.length === 0 ? (
-          <div className="text-center py-20">
-            <CheckCircle size={48} className="mx-auto text-slate-300 mb-4" />
-            <h3 className="text-lg font-semibold text-slate-500">All caught up!</h3>
-            <p className="text-sm text-muted-foreground">No notifications at the moment.</p>
+          <div className="empty-state">
+            <CheckCircle className="empty-icon" />
+            <h3 className="empty-title">All caught up!</h3>
+            <p className="empty-description">
+              No notifications at the moment.
+            </p>
           </div>
         ) : (
-          <div className="space-y-3">
-            {notifications.map((n: any) => (
-              <motion.div key={n.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}
-                className={`flex items-start gap-4 p-4 rounded-xl border transition-all ${n.is_read ? "bg-white" : "bg-blue-50 border-blue-100"}`}>
-                <div className={`w-3 h-3 rounded-full mt-1.5 shrink-0 ${n.is_read ? "bg-slate-300" : "bg-blue-500"}`} />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold text-slate-800">{n.title}</h3>
-                    <span className="text-xs text-muted-foreground shrink-0">{new Date(n.created_at).toLocaleDateString()}</span>
+          <div className="notifications-list">
+            {notifications.map((notification: any, index: number) => (
+              <motion.div
+                key={notification.id}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className={`notification-card ${
+                  !notification.is_read ? "notification-unread" : ""
+                }`}
+              >
+                <div
+                  className={`notification-icon ${
+                    !notification.is_read ? "icon-unread" : ""
+                  }`}
+                >
+                  <Bell
+                    size={18}
+                    className={!notification.is_read ? "icon-unread-bell" : ""}
+                  />
+                </div>
+                <div className="notification-content">
+                  <div className="notification-header">
+                    <h3 className="notification-title">{notification.title}</h3>
+                    <span className="notification-date">
+                      {new Date(notification.created_at).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )}
+                    </span>
                   </div>
-                  <p className="text-sm text-slate-600 mt-1">{n.message}</p>
-                  {n.type && <span className="inline-block mt-2 text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 capitalize">{n.type}</span>}
+                  <p className="notification-message">{notification.message}</p>
+                  <div className="notification-footer">
+                    {notification.sender_name && (
+                      <span className="sender-badge">
+                        <User size={12} />
+                        {notification.sender_name}
+                      </span>
+                    )}
+                    {notification.type && (
+                      <span className={`type-badge type-${notification.type.toLowerCase()}`}>
+                        {notification.type}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             ))}

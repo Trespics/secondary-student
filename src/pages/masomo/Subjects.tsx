@@ -166,22 +166,6 @@ const SubjectCard = ({ subject, index }: { subject: any; index: number }) => {
               </span>
             </div>
             
-            {/* Progress Indicator */}
-            <div className="subject-progress">
-              <div className="progress-label">
-                <span>Progress</span>
-                <span style={{ color: colors.border }}>65%</span>
-              </div>
-              <div className="progress-bar">
-                <div 
-                  className="progress-fill" 
-                  style={{ 
-                    width: '65%', 
-                    background: `linear-gradient(90deg, ${colors.border}, ${colors.border}dd)` 
-                  }}
-                />
-              </div>
-            </div>
           </div>
           
           {/* Hover Effect Overlay */}

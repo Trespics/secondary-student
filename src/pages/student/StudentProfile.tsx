@@ -156,9 +156,9 @@ const StudentProfile = () => {
                     <MapPin className="info-icon" />
                   </div>
                   <div className="info-content">
-                    <span className="info-label">Address</span>
+                    <span className="info-label">Current Class</span>
                     <span className="info-value">
-                      {profile?.student_details?.address || 'Not set'}
+                      {profile?.class_name || 'Enrolled'}
                     </span>
                   </div>
                 </div>

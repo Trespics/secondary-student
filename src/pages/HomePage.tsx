@@ -63,7 +63,7 @@ const HomePage = () => {
             </p>
 
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-              <Link to="/student" style={{
+              <Link to="/login" style={{
                 textDecoration: "none", padding: "0.9rem 2rem",
                 background: "linear-gradient(135deg, #3b82f6, #6366f1)",
                 color: "white", borderRadius: "14px", fontSize: "1rem",
@@ -114,8 +114,8 @@ const HomePage = () => {
               initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.5 }}
               whileHover={{ y: -5 }}
-            >
-              <Link to="/student" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+            >     
+              <Link to="/login" style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <div style={{
                   background: "linear-gradient(135deg, rgba(59,130,246,0.1), rgba(59,130,246,0.02))",
                   border: "1px solid rgba(59,130,246,0.15)", borderRadius: "24px",
@@ -151,7 +151,7 @@ const HomePage = () => {
               viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ y: -5 }}
             >
-              <Link to="/masomo" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+              <Link to="/masomo/login" style={{ textDecoration: "none", display: "block", height: "100%" }}>
                 <div style={{
                   background: "linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.02))",
                   border: "1px solid rgba(139,92,246,0.15)", borderRadius: "24px",

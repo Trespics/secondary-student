@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import StudentPortalLayout from "@/components/StudentPortalLayout";
 import api from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
-import { BookOpen, Bell, User, ArrowRight, Loader2, Calendar, Shield } from "lucide-react";
+import { BookOpen, Bell, ArrowRight, Loader2, Calendar, Shield } from "lucide-react";
 import "../styles/StudentDashboard.css";
 
 const StudentDashboard = () => {
@@ -47,7 +47,7 @@ const StudentDashboard = () => {
     },
     { 
       title: "Class", 
-      value: profile?.student_details?.class || "Enrolled", 
+      value: profile?.class_name || "Enrolled", 
       icon: BookOpen, 
       colorClass: "stat-purple",
       description: "Current class"
@@ -106,7 +106,7 @@ const StudentDashboard = () => {
           {/* Main Content Grid */}
           <div className="content-grid">
             {/* Quick Actions Card */}
-            <div className="quick-actions-card">
+            {/* <div className="quick-actions-card">
               <div className="quick-actions-header">
                 <h2 className="quick-actions-title">Quick Actions</h2>
                 <p className="quick-actions-subtitle">Frequently used tools</p>
@@ -147,7 +147,7 @@ const StudentDashboard = () => {
                 </Link>
               </div>
 
-              {/* Quick Stats */}
+             
               <div className="quick-stats">
                 <div className="quick-stat">
                   <div className="quick-stat-label">Attendance</div>
@@ -164,7 +164,7 @@ const StudentDashboard = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Notifications Card */}
             <div className="notifications-card">
