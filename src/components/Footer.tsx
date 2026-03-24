@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
     if (!email) return;
     setStatus('loading');
     try {
-      const response = await fetch('http://localhost:5000/api/public/newsletter', {
+      const response = await fetch('https://secondary-server-le82.onrender.com/api/public/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -140,18 +140,18 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="footer-section">
+          <div className="footer-section" >
             <h4 className="footer-title">
               <span className="title-underline">Contact Us</span>
             </h4>
-            <ul className="contact-info">
+            <ul className="contact-info" style={{color:"black"}}>
               <li>
                 <div className="contact-icon">
                   <FaEnvelope />
                 </div>
                 <div className="contact-detail">
-                  <span className="contact-label">Email</span>
-                  <a href="mailto:info@eduportal.com">info@eduportal.com</a>
+                  <span className="contact-label" style={{color:"black"}}>Email</span>
+                  <a href="mailto:info@eduportal.com" style={{color:"black"}}>trespicsj@gmail.com</a>
                 </div>
               </li>
               <li>
@@ -159,8 +159,8 @@ const Footer: React.FC = () => {
                   <FaPhone />
                 </div>
                 <div className="contact-detail">
-                  <span className="contact-label">Phone</span>
-                  <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                  <span className="contact-label" style={{color:"black"}}>Phone</span>
+                  <a href="tel:+15551234567" style={{color:"black"}}>+254 770428297</a>
                 </div>
               </li>
               <li>
@@ -168,8 +168,8 @@ const Footer: React.FC = () => {
                   <FaMapMarkerAlt />
                 </div>
                 <div className="contact-detail">
-                  <span className="contact-label">Office</span>
-                  <span>123 Education St, CA 94105</span>
+                  <span className="contact-label" style={{color:"black"}}>Office</span>
+                  <span style={{color:"black"}}>Kutus Town</span>
                 </div>
               </li>
             </ul>
