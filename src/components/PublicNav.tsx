@@ -10,7 +10,7 @@ const PublicNav = () => {
     { label: "Home", to: "/" },
     { label: "About", to: "/about" },
     { label: "Contact", to: "/contact" },
-    { label: "Library", to: "/https://secondary-library.vercel.app/login" },
+    { label: "Library", to: "https://secondary-library.vercel.app/login" },
   ];
 
   return (
