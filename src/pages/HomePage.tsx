@@ -48,11 +48,11 @@ const HomePage = () => {
               background: "linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
             }}>
-              Your Learning Journey <br />
-              <span style={{
+              Your Learning Journey Starts Here<br />
+              {/* <span style={{
                 background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
                 WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
-              }}>Starts Here</span>
+              }}>Starts Here</span> */}
             </h1>
 
             <p style={{

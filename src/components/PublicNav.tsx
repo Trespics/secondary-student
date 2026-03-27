@@ -10,6 +10,7 @@ const PublicNav = () => {
     { label: "Home", to: "/" },
     { label: "About", to: "/about" },
     { label: "Contact", to: "/contact" },
+    { label: "Library", to: "/https://secondary-library.vercel.app/login" },
   ];
 
   return (
@@ -29,7 +30,7 @@ const PublicNav = () => {
             fontSize: "1.5rem", fontWeight: 800, letterSpacing: "1px",
             background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
-          }}>Florante</span>
+          }}>FloranteHub</span>
         </Link>
 
         {/* Desktop Links */}
