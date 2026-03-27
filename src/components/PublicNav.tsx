@@ -29,7 +29,7 @@ const PublicNav = () => {
             fontSize: "1.5rem", fontWeight: 800, letterSpacing: "1px",
             background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
             WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
-          }}>TRESPICS</span>
+          }}>Florante</span>
         </Link>
 
         {/* Desktop Links */}

@@ -13,7 +13,7 @@ const navItems = [
   { label: "Pastpapers", icon: FileText, to: "/masomo/past-papers" },
   { label: "Assignments", icon: ClipboardCheck, to: "/masomo/assignments" },
   { label: "Grades & Results", icon: BarChart3, to: "/masomo/grades" },
-  // { label: "CATs", icon: ClipboardCheck, to: "/masomo/cats" },
+  { label: "Report Card", icon: FileText, to: "/masomo/report-card" },
 ];    
 
 const MasomoPortalSidebar = ({ onClose }: Props) => {
@@ -43,7 +43,7 @@ const MasomoPortalSidebar = ({ onClose }: Props) => {
       )}
       {isMobile && isMobileMenuOpen && <div className="sidebar-overlay" onClick={() => setIsMobileMenuOpen(false)} />}
       <aside className={`portal-sidebar masomo ${isMobile ? "mobile" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">TRESPICS</span></div>
+        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">Florante</span></div>
         <div style={{ padding: "12px 16px" }}>
           <Link to="/student" onClick={handleLinkClick} style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",

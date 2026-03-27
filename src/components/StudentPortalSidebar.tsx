@@ -39,7 +39,7 @@ const StudentPortalSidebar = ({ onClose }: Props) => {
       )}
       {isMobile && isMobileMenuOpen && <div className="sidebar-overlay" onClick={() => setIsMobileMenuOpen(false)} />}
       <aside className={`portal-sidebar student ${isMobile ? "mobile" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">TRESPICS</span></div>
+        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">Florante</span></div>
         <div style={{ padding: "12px 16px" }}>
           <Link to="/masomo" onClick={handleLinkClick} style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",

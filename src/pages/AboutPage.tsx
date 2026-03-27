@@ -26,7 +26,7 @@ const AboutPage = () => {
               background: "linear-gradient(135deg, #f8fafc, #cbd5e1)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
               marginBottom: "1rem"
-            }}>About TRESPICS School</h1>
+            }}>About Florante School</h1>
             <p style={{ color: "#94a3b8", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: "600px", margin: "0 auto" }}>
               We are a forward-thinking institution dedicated to nurturing the next generation of leaders
               through competency-based education and modern learning technology.

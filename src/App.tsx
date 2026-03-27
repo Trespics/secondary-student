@@ -33,6 +33,7 @@ import TakeAssignment from "@/pages/masomo/TakeAssignment";
 import GradesResults from "@/pages/masomo/GradesResults";
 import CATs from "@/pages/masomo/CATs";
 import TakeCAT from "@/pages/masomo/TakeCAT";
+import ReportCard from "@/pages/masomo/ReportCard";
 import MasomoLogin from "./pages/masomo/MasomoLogin";
 
 const queryClient = new QueryClient({
@@ -107,6 +108,7 @@ function App() {
             <Route path="/masomo/grades" element={<ProtectedRoute loginPath="/masomo/login"><GradesResults /></ProtectedRoute>} />
             <Route path="/masomo/cats" element={<ProtectedRoute loginPath="/masomo/login"><CATs /></ProtectedRoute>} />
             <Route path="/masomo/cats/:id/take" element={<ProtectedRoute loginPath="/masomo/login"><TakeCAT /></ProtectedRoute>} />
+            <Route path="/masomo/report-card" element={<ProtectedRoute loginPath="/masomo/login"><ReportCard /></ProtectedRoute>} />
             {/* 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
