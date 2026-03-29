@@ -21,6 +21,7 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const StudentDashboard = lazy(() => import("@/pages/student/StudentDashboard"));
 const StudentProfile = lazy(() => import("@/pages/student/StudentProfile"));
 const StudentNotifications = lazy(() => import("@/pages/student/StudentNotifications"));
+const GradesResults = lazy(() => import("@/pages/student/GradesResults"));
 
 // Masomo Portal pages
 const MasomoDashboard = lazy(() => import("@/pages/masomo/MasomoDashboard"));
@@ -31,7 +32,6 @@ const Books = lazy(() => import("@/pages/masomo/Books"));
 const PastPapers = lazy(() => import("@/pages/masomo/PastPapers"));
 const Assignments = lazy(() => import("@/pages/masomo/Assignments"));
 const TakeAssignment = lazy(() => import("@/pages/masomo/TakeAssignment"));
-const GradesResults = lazy(() => import("@/pages/masomo/GradesResults"));
 const CATs = lazy(() => import("@/pages/masomo/CATs"));
 const TakeCAT = lazy(() => import("@/pages/masomo/TakeCAT"));
 const ReportCard = lazy(() => import("@/pages/masomo/ReportCard"));
@@ -103,6 +103,7 @@ function App() {
               <Route path="/student" element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
               <Route path="/student/profile" element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
               <Route path="/student/notifications" element={<ProtectedRoute><StudentNotifications /></ProtectedRoute>} />
+              <Route path="/student/grades" element={<ProtectedRoute><GradesResults /></ProtectedRoute>} />
   
               {/* Masomo Portal (Protected) */}
               <Route path="/masomo" element={<ProtectedRoute loginPath="/masomo/login"><MasomoDashboard /></ProtectedRoute>} />
@@ -113,7 +114,6 @@ function App() {
               <Route path="/masomo/past-papers" element={<ProtectedRoute loginPath="/masomo/login"><PastPapers /></ProtectedRoute>} />
               <Route path="/masomo/assignments" element={<ProtectedRoute loginPath="/masomo/login"><Assignments /></ProtectedRoute>} />
               <Route path="/masomo/assignments/:id/take" element={<ProtectedRoute loginPath="/masomo/login"><TakeAssignment /></ProtectedRoute>} />
-              <Route path="/masomo/grades" element={<ProtectedRoute loginPath="/masomo/login"><GradesResults /></ProtectedRoute>} />
               <Route path="/masomo/cats" element={<ProtectedRoute loginPath="/masomo/login"><CATs /></ProtectedRoute>} />
               <Route path="/masomo/cats/:id/take" element={<ProtectedRoute loginPath="/masomo/login"><TakeCAT /></ProtectedRoute>} />
               <Route path="/masomo/report-card" element={<ProtectedRoute loginPath="/masomo/login"><ReportCard /></ProtectedRoute>} />

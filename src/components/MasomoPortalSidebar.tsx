@@ -12,7 +12,6 @@ const navItems = [
   { label: "Books", icon: BookOpen, to: "/masomo/books" },
   { label: "Pastpapers", icon: FileText, to: "/masomo/past-papers" },
   { label: "Assignments", icon: ClipboardCheck, to: "/masomo/assignments" },
-  { label: "Grades & Results", icon: BarChart3, to: "/masomo/grades" },
   { label: "Report Card", icon: FileText, to: "/masomo/report-card" },
 ];    
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/lib/auth-context";
-import { LayoutDashboard, User, Bell, LogOut, Home, Menu, X } from "lucide-react";
+import { LayoutDashboard, User, Bell, LogOut, Home, Menu, X, BarChart3 } from "lucide-react";
 import "./styles/PortalLayout.css";
 
 interface Props { isOpen?: boolean; onClose?: () => void; }
@@ -10,6 +10,7 @@ const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, to: "/student" },
   { label: "My Profile", icon: User, to: "/student/profile" },
   { label: "Notifications", icon: Bell, to: "/student/notifications" },
+  { label: "Grades & Results", icon: BarChart3, to: "/student/grades" },
 ];
 
 const StudentPortalSidebar = ({ onClose }: Props) => {
