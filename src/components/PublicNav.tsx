@@ -10,7 +10,7 @@ const PublicNav = () => {
     { label: "Home", to: "/" },
     { label: "About", to: "/about" },
     { label: "Contact", to: "/contact" },
-    { label: "Library", to: "https://secondary-library.vercel.app/login" },
+    { label: "Library", to: "https://secondary-library.vercel.app/login", target: "_blank" },
   ];
 
   return (
@@ -49,6 +49,7 @@ const PublicNav = () => {
             color: "#60a5fa", borderRadius: "10px", fontSize: "0.9rem",
             fontWeight: 600, transition: "background 0.2s"
           }}>Student Portal</Link>
+
           <Link to="/masomo/login" style={{
             textDecoration: "none", padding: "0.6rem 1.2rem",
             background: "linear-gradient(135deg, #8b5cf6, #6366f1)",

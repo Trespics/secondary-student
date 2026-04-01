@@ -32,7 +32,7 @@ const StudentPortalLayout = ({ children }: Props) => {
           <button className="menu-toggle" onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Toggle menu">
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-          <span className="mobile-logo">Florante</span>
+          <span className="mobile-logo">{user?.schools?.name || "School Portal"}</span>
           <div className="header-avatar"><span className="avatar-initials">{user?.name?.charAt(0) || "S"}</span></div>
         </header>
         <header className="desktop-header">

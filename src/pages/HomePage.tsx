@@ -100,9 +100,9 @@ const HomePage = () => {
             <h2 style={{
               fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 700,
               color: "#f1f5f9", marginBottom: "0.75rem"
-            }}>Two Portals, One Experience</h2>
+            }}>Three Portals, One Experience</h2>
             <p style={{ color: "#94a3b8", fontSize: "1.05rem", maxWidth: "600px", margin: "0 auto" }}>
-              Your academic life organized into two focused portals
+              Your academic life organized into three focused portals
             </p>
           </motion.div>
 
@@ -174,6 +174,42 @@ const HomePage = () => {
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                     {["Subjects & Materials", "Assignments & CATs", "Grades & Results"].map(item => (
                       <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#a78bfa", fontSize: "0.9rem" }}>
+                        <GraduationCap size={14} /> {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+              whileHover={{ y: -5 }}
+            >
+              <Link to="https://secondary-parents.vercel.app/login" style={{ textDecoration: "none", display: "block", height: "100%" }} target="_blank">
+                <div style={{
+                  background: "linear-gradient(135deg, rgba(92, 246, 138, 0.1), rgba(92, 246, 138, 0.1))",
+                  border: "1px solid rgba(139,92,246,0.15)", borderRadius: "24px",
+                  padding: "2.5rem", height: "100%", transition: "all 0.3s"
+                }}>
+                  <div style={{
+                    width: "56px", height: "56px", borderRadius: "16px",
+                    background: "linear-gradient(135deg, #74e927, #74e927)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    marginBottom: "1.5rem", boxShadow: "0 8px 20px rgba(92, 246, 125, 0.3)"
+                  }}>
+                    <User size={28} color="white" />
+                  </div>
+                  <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#f1f5f9", marginBottom: "0.75rem" }}>
+                    Parent Portal
+                  </h3>
+                  <p style={{ color: "#94a3b8", marginBottom: "1.5rem", lineHeight: 1.6 }}>
+                    Access learning materials, complete assignments, take CATs, and track your academic grades and performance.
+                  </p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {["Subjects & Materials", "Assignments & CATs", "Grades & Results"].map(item => (
+                      <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#74e927", fontSize: "0.9rem" }}>
                         <GraduationCap size={14} /> {item}
                       </div>
                     ))}

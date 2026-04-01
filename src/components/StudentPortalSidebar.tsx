@@ -15,7 +15,7 @@ const navItems = [
 
 const StudentPortalSidebar = ({ onClose }: Props) => {
   const { pathname } = useLocation();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -40,7 +40,7 @@ const StudentPortalSidebar = ({ onClose }: Props) => {
       )}
       {isMobile && isMobileMenuOpen && <div className="sidebar-overlay" onClick={() => setIsMobileMenuOpen(false)} />}
       <aside className={`portal-sidebar student ${isMobile ? "mobile" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">Florante</span></div>
+        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">{user?.schools?.name || "School Portal"}</span></div>
         <div style={{ padding: "12px 16px" }}>
           <Link to="/masomo" onClick={handleLinkClick} style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",

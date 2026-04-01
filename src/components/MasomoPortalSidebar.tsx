@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/lib/auth-context";
-import { LayoutDashboard, BookOpen, FileText, ClipboardCheck, BarChart3, LogOut, Home, Menu, X } from "lucide-react";
+import { LayoutDashboard, BookOpen, FileText, ClipboardCheck, LogOut, Home, Menu, X } from "lucide-react";
 import "./styles/PortalLayout.css";
 
 interface Props { isOpen?: boolean; onClose?: () => void; }
@@ -17,7 +17,7 @@ const navItems = [
 
 const MasomoPortalSidebar = ({ onClose }: Props) => {
   const { pathname } = useLocation();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -42,7 +42,7 @@ const MasomoPortalSidebar = ({ onClose }: Props) => {
       )}
       {isMobile && isMobileMenuOpen && <div className="sidebar-overlay" onClick={() => setIsMobileMenuOpen(false)} />}
       <aside className={`portal-sidebar masomo ${isMobile ? "mobile" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">Florante</span></div>
+        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">{user?.schools?.name || "School Portal"}</span></div>
         <div style={{ padding: "12px 16px" }}>
           <Link to="/student" onClick={handleLinkClick} style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
