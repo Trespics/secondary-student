@@ -25,7 +25,7 @@ const MasomoPortalLayout = ({ children }: Props) => {
 
   return (
     <div className="portal-layout masomo">
-      {isMobile && <div className={`mobile-overlay ${isSidebarOpen ? "visible" : ""}`} onClick={() => setIsSidebarOpen(false)} />}
+      {/* {isMobile && <div className={`mobile-overlay ${isSidebarOpen ? "visible" : ""}`} onClick={() => setIsSidebarOpen(false)} />} */}
       <MasomoPortalSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       <main className={`portal-main ${isSidebarOpen ? "sidebar-open" : ""}`}>
         <header className="mobile-header">

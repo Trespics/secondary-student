@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/lib/auth-context";
-import { LayoutDashboard, BookOpen, FileText, ClipboardCheck, LogOut, Home, Menu, X } from "lucide-react";
+import { LayoutDashboard, BookOpen, FileText, ClipboardCheck, LogOut, Home, X } from "lucide-react";
 import "./styles/PortalLayout.css";
 
 interface Props { isOpen?: boolean; onClose?: () => void; }
@@ -15,34 +15,36 @@ const navItems = [
   { label: "Report Card", icon: FileText, to: "/masomo/report-card" },
 ];    
 
-const MasomoPortalSidebar = ({ onClose }: Props) => {
+const MasomoPortalSidebar = ({ isOpen, onClose }: Props) => {
   const { pathname } = useLocation();
   const { logout, user } = useAuth();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {   
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) setIsMobileMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleLinkClick = () => { setIsMobileMenuOpen(false); onClose?.(); };
+  const handleLinkClick = () => { onClose?.(); };
   const handleLogout = () => { logout(); window.location.href = "/"; };
 
   return (
     <>
-      {isMobile && (
-        <button className="mobile-menu-toggle" onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen); if (!isMobileMenuOpen) onClose?.(); }} aria-label="Toggle menu">
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      )}
-      {isMobile && isMobileMenuOpen && <div className="sidebar-overlay" onClick={() => setIsMobileMenuOpen(false)} />}
-      <aside className={`portal-sidebar masomo ${isMobile ? "mobile" : ""} ${isMobileMenuOpen ? "mobile-open" : ""}`}>
-        <div className="sidebar-header"><Home className="header-icon" /><span className="header-title">{user?.schools?.name || "School Portal"}</span></div>
+      <aside className={`portal-sidebar masomo ${isMobile ? "mobile" : ""} ${isOpen ? "mobile-open" : ""}`}>
+        <div className="sidebar-header" style={{ justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <Home className="header-icon" />
+            <span className="header-title">{user?.schools?.name || "School Portal"}</span>
+          </div>
+          {isMobile && (
+            <button onClick={onClose} style={{ background: "none", border: "none", color: "#a0a3bd", cursor: "pointer", display: "flex", alignItems: "center", padding: "4px" }} aria-label="Close menu">
+              <X size={24} />
+            </button>
+          )}
+        </div>
         <div style={{ padding: "12px 16px" }}>
           <Link to="/student" onClick={handleLinkClick} style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
